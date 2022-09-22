@@ -1,0 +1,8 @@
+
+#container{width: 1000px; margin: 20px auto; text-align:center}
+a{text-decoration: none;}
+h2{padding-top: 20px;}
+
+.tbl_list{width: 700px; margin: 0 auto; text-align: center}
+.tbl_list, th, td{border:1px solid #ccc; border-collapse: collapse;}
+.tbl_list thead{background: #eee;}
