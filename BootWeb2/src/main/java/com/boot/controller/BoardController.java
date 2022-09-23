@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import com.boot.domain.Board;
 import com.boot.service.BoardService;
 
-import jdk.internal.org.jline.utils.Log;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -20,11 +19,6 @@ public class BoardController {
 
 	@Autowired
 	private BoardService service;
-	
-	@GetMapping("/hello")
-	public String hello() {
-		return "hello";
-	}
 	
 	@GetMapping("/getBoardList")
 	public String getBoardList(Model model) {
@@ -75,8 +69,5 @@ public class BoardController {
 		return "redirect:getBoardList";
 	}
 
-	@GetMapping("/")
-	public String index() {
-		return "index";
-	}
+	
 }

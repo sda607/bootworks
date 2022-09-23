@@ -16,12 +16,13 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @SpringBootTest
 public class QueryMethodTests {
-
+	
 	@Autowired
 	private BoardRepository boardRepo;
-	
+	/*
 	//@BeforeEach 테스트 메소드가 실행되기 전에 동작 
-	/*@BeforeEach
+	@BeforeEach
+	@Test
 	public void dataPrepare() {
 		for(int i=1; i<=200; i++) {
 			Board board = new Board();
@@ -34,7 +35,8 @@ public class QueryMethodTests {
 			boardRepo.save(board);
 		}
 	}
-	
+	*/
+	/*
 	 @Test
 	 public void testFindByTitle() {
 		 
@@ -44,7 +46,8 @@ public class QueryMethodTests {
 			 log.info("---->" + board.toString());
 		 }
 	 }
-	  
+	 */
+	/*
 	 @Test
 	 public void testFindByContentContaining() {
 		 List<Board> boardList = boardRepo.findByContentContaining("17");
@@ -55,6 +58,7 @@ public class QueryMethodTests {
 		 }
 	 }
 	 */
+	 /*
 	 @Test
 	 public void testFindByTitleContainingOrContentContaining() {
 		 List<Board> boardList =
@@ -65,11 +69,11 @@ public class QueryMethodTests {
 			 log.info("---->" + board.toString());
 		 }
 	 }
-	
+	*/
 	 @Test
 	 public void testfindByTitleContainingOrderBySeqDesc() {
 		 List<Board> boardList = 
-				 boardRepo.findByTitleContainingOrderBySeqDesc("18");
+				 boardRepo.findByTitleContainingOrderBySeqDesc("테스트 제목 10");
 		 
 		 log.info("검색 결과");
 		 for(Board board : boardList) {
