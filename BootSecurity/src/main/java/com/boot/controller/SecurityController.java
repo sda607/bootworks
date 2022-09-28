@@ -20,4 +20,27 @@ public class SecurityController {
 	public void forMember() {
 		log.info("member요청 입니다.");
 	}
+	
+	@GetMapping("/manager")
+	public void forManager() {
+		log.info("manager 요청 입니다.");
+	}
+	
+	@GetMapping("/admin")
+	public void forAdmin() {
+		log.info("Admin 요청 입니다.");
+	}
+	
+	@GetMapping("/login")
+	public void login() {
+		log.info("login 요청입니다");
+	}
+	@GetMapping("/loginSuccess")
+	public void loginSuccess() {
+		log.info("loginSuccess성공");
+	}
+	@GetMapping("/accessDenied")
+	public void accessDenied() {
+		log.info("accessDenied 접근 거부");
+	}
 }
