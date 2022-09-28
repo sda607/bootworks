@@ -13,24 +13,26 @@ import com.boot.persistence.BoardRepository;
 
 @Service
 public class BoardServiceImpl implements BoardService{
-
+	
 	@Autowired
 	private BoardRepository boardRepo;
-	
-	//목록보기
+
+	//목록 보기
 	@Override
 	public List<Board> getBoardList() {
-		//findAll() 
-		return boardRepo.findAll(Sort.by(Sort.Direction.DESC, "seq"));
+		//findAll() - select * from board가 내장됨
+		//return boardRepo.findAll(); //오름차순
+		return boardRepo.findAll(Sort.by(Sort.Direction.DESC, "seq"));//내림차순
 	}
-	
+
 	//새글 등록
 	@Override
-	public void insertBoard(Board board) {
+	public void insetBoard(Board board) {
 		//save() - insert into ~ values
 		boardRepo.save(board);
 	}
-	//상세보기
+
+	//게시글 상세보기
 	@Override
 	public Board getBoard(Long seq) {
 		//findById().get() - select * from ~ where seq=?
@@ -40,26 +42,23 @@ public class BoardServiceImpl implements BoardService{
 	//글 삭제
 	@Override
 	public void deleteBoard(Board board) {
-
 		boardRepo.delete(board);
 	}
+
 	//글 수정
 	@Override
-	public void updateBoard(Board board) {
-
-		/*
-		 * Board findBoard = boardRepo.findById(board.getSeq()).get();
-		 * findBoard.setTitle(board.getTitle()); //입력 폼의 제목입력
-		 * findBoard.setContent(board.getContent());//입력 폼의 내용을 세팅
-		 */		
-		boardRepo.save(board);	//다시 저장
+	public void updateBoard(Board board) { //파라미터에서 커맨드 객체(get/set 작동)
+		/*Board findBoard = boardRepo.findById(board.getSeq()).get();
+		findBoard.setTitle(board.getTitle()); //입력 폼의 제목을 세팅
+		findBoard.setContent(board.getContent()); //입력 폼의 내용을 세팅*/
+		
+		boardRepo.save(board);  //다시 저장(수정)
 	}
 
-	@Transactional
+	@Transactional  //트랜잭션 처리
 	@Override
 	public void updateCount(Long seq) {
 		boardRepo.updateCount(seq);
-		
 	}
 
 }

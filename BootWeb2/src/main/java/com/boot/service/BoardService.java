@@ -10,8 +10,8 @@ public interface BoardService {
 	List<Board> getBoardList();
 	
 	//새글 등록
-	void insertBoard(Board board);
-
+	void insetBoard(Board board);
+	
 	//글 상세 보기
 	Board getBoard(Long seq);
 	
@@ -23,9 +23,6 @@ public interface BoardService {
 	
 	//조회수 카운트
 	void updateCount(Long seq);
-	
-	//
-	
-	
-	
 }
+
+

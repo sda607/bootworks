@@ -1,16 +1,32 @@
+<!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta charset="utf-8">
+<meta charset="UTF-8">
 <title>메인 페이지</title>
 <link rel="stylesheet" href="/static/css/style.css">
 </head>
 <body>
+	<!-- menu.html의 nav 태그 삽입 -->
+	<div th:replace="menu.html::nav"></div>
+	
 	<div id="container">
-		<h2>메인 페이지</h2>
-		<p><a th:href="@{/getBoardList}">글목록 바로가기</a></p>
+		<h2>BootWeb2 main page</h2>
 	</div>
-
-
-
+	
+	<!-- <p>
+	<a th:href="@{/getBoardList}">게시판 바로가기 |</a>
+	<a th:href="@{/login}">로그인</a>&nbsp;
+	</p> -->
+	
+	<div class="main_img_container">
+		<img src="/static/images/bg2.jpg" class="main_img" id="pic">	
+	</div>	
+	
+	<!-- <p>
+		<a href="boardError">BoardException 발생 |</a> 
+		<a href="illegalArgumentError">illegalArgumentException 발생 |</a>
+		<a href="sqlError">SQLException 발생</a>
+	</p> -->
+	
 </body>
 </html>
