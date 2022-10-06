@@ -2,6 +2,7 @@ package com.boot.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -36,5 +37,12 @@ public class MemberController {
 	public String signup(Member member) {
 		memberService.signup(member);
 		return "redirect:login";
+	}
+	//회원정보
+	@GetMapping("/view")
+	public String view(String userid, Model  model) {
+		Member member = memberService.view(userid);
+		model.addAttribute("member", member);
+		return "member/view";
 	}
 }

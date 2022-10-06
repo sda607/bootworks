@@ -28,4 +28,10 @@ public class MemberServiceImpl implements MemberService{
 		memberRepo.save(member);
 	}
 
+	@Override
+	public Member view(String userid) {
+		
+		return memberRepo.findById(userid).get();
+	}
+
 }
