@@ -2,10 +2,14 @@ package com.boot.service;
 
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Service;
 
+import com.boot.config.SecurityUser;
 import com.boot.domain.Board;
 import com.boot.repository.BoardRepository;
 
@@ -25,6 +29,18 @@ public class BoardServiceImpl implements BoardService{
 	@Override
 	public Board getBoard(Long seq) {
 		return boardRepo.findById(seq).get();
+	}
+	//글쓰기
+	@Override
+	public void insertBoard(Board board) {
+	
+		boardRepo.save(board);
+	}
+	//조회수
+	@Transactional
+	@Override
+	public void updateCount(Long seq) {
+		boardRepo.updateCount(seq);
 	}
 
 	
