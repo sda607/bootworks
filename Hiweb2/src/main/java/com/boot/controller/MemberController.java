@@ -32,11 +32,12 @@ public class MemberController {
 	@GetMapping("/signup")
 	public void signup() {}
 	
-	
+	//회원가입 처리
 	@PostMapping("/signup")
-	public String signup(Member member) {
+	public String signup(Member member, Model  model) {
 		memberService.signup(member);
-		return "redirect:login";
+		model.addAttribute("msg", "가입");
+		return "member/result";
 	}
 	//회원정보
 	@GetMapping("/view")
@@ -45,4 +46,22 @@ public class MemberController {
 		model.addAttribute("member", member);
 		return "member/view";
 	}
+	
+	//회원정보 수정
+	@PostMapping("/update")
+	public String update(Member member, Model model) {
+		memberService.update(member);
+		model.addAttribute("msg", "수정");
+		return "member/result";
+		
+	}
+	
+	//회원정보 삭제
+	@GetMapping("/delete")
+	public String delete(Member member, Model model) {
+		memberService.delete(member);
+		model.addAttribute("msg", "삭제");
+		return "member/result";
+	}
+	
 }
