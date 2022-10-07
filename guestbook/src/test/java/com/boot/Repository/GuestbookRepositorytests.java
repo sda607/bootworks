@@ -1,5 +1,6 @@
 package com.boot.Repository;
 
+import java.util.Optional;
 import java.util.stream.IntStream;
 
 import org.junit.jupiter.api.Test;
@@ -30,6 +31,21 @@ public class GuestbookRepositorytests {
 			
 		});
 		
-		
 	}
+	
+	@Test
+	public void updateTest() {
+		Optional<Guestbook> result = guestbookRepository.findById(300L);
+		
+		if(result.isPresent()) {
+			Guestbook guestbook = result.get();
+			
+			guestbook.changeTitle("제목수정....");
+			guestbook.changeContent("내용수정....");
+			
+			guestbookRepository.save(guestbook);
+		}
+	}
+	
+	
 }
