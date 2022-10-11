@@ -13,4 +13,8 @@ public interface BoardService {
 	void insertBoard(Board board);//글쓰기
 	
 	void updateCount(Long seq);	//조회수
+	
+	void updateBoard(Board board);	//수정
+	
+	void deleteBoard(Board board);  //삭제
 }

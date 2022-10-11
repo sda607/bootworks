@@ -29,6 +29,7 @@ public class Member {
 	
 	private String name;
 	
+	
 	@Column(updatable = false,
 			columnDefinition = "timestamp DEFAULT CURRENT_TIMESTAMP")
 	private LocalDateTime regDate;  //가입일
