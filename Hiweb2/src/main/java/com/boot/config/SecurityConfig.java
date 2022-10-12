@@ -26,7 +26,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 			.logoutRequestMatcher(new AntPathRequestMatcher("/member/logout"))
 			.invalidateHttpSession(true)
 			.logoutSuccessUrl("/");
-		
+	//권한설정
+		http.authorizeHttpRequests()
+			.antMatchers("/", "/member/**").permitAll()	//인증 되지 않은 모든 사용자 접근
+			.antMatchers("/admin/**").hasRole("ADMIN");//ADMIN 권한
 		
 	}
 	
