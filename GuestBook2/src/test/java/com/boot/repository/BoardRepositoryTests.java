@@ -23,7 +23,7 @@ public class BoardRepositoryTests{
 
 	@Autowired
 	BoardRepository boardRepo;
-	/*
+	
 	//100명이 게시글 10개 쓰기
 	@Test
 	public void insertBoard() {
@@ -77,7 +77,7 @@ public class BoardRepositoryTests{
 			System.out.println(Arrays.toString(arr));
 		});
 	}
-	*/
+	
 	//특정 게시물 조회
 	@Test
 	public void testRead2() {

@@ -1,12 +1,13 @@
 package com.boot.service;
 
-import javax.swing.text.html.parser.Entity;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.boot.dto.BoardDto;
+import com.boot.dto.PageRequestDto;
+import com.boot.dto.PageResultDto;
 
 
 @SpringBootTest
@@ -25,21 +26,31 @@ public class BoardServiceTests {
 		boardService.register(dto);
 	}
 	
-	//Entity에서 dto로 변환
-	default BoardDto EntityToDto(Board board, Member member, Long replyCount) {
+	
+	//게시글 목록 보기
+	@Test
+	public void testList() {
 		
-		BoardDto boardDto = BoardDto.builder()
-				.bno(board.getBno())
-				.title(board.getTitle())
-				.content(board.getContent())
-				.regDate(board.getRegDate())
-				.modDate(board.getModDate())
-				.writerEmail(member.getEmail())
-				.writerName(member.getName())
-				.replyCount(replyCount.intValue())
-				.build();
+		PageRequestDto pageRequestDto = new PageRequestDto();
 		
-		return boardDto;
+		PageResultDto<BoardDto, Object[]> result = boardService.getList(pageRequestDto);
+		
+		for(BoardDto boardDto : result.getDtoList()) {
+			System.out.println(boardDto);
+		}
 	}
+	
+	//게시글 상세 보기
+	@Test
+	public void testget() {
+		Long bno = 90L;
+		BoardDto boardDto = boardService.get(bno);
+		
+		System.out.println(boardDto);
+		
+	}
+	
+	
+	
 	
 }

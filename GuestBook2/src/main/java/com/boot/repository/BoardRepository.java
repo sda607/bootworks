@@ -11,17 +11,18 @@ import org.springframework.data.repository.query.Param;
 import com.boot.entity.Board;
 
 public interface BoardRepository extends JpaRepository<Board, Long>{
-
+	
 	//회원
 	@Query("SELECT b, w FROM Board b LEFT JOIN b.writer w WHERE b.bno = :bno")
 	Object getBoardWithWriter(@Param("bno") Long bno);
 	
-	//게시글
-	@Query("SELECT b, r FROM Board b LEFT JOIN Reply r ON r.board = b.bno = :bno")
+	//게시글(댓글 포함 조회)
+	@Query("SELECT b, r FROM Board b LEFT JOIN Reply r ON "
+			+ "r.board = b WHERE b.bno = :bno")
 	List<Object> getBoardWithReply(@Param("bno") Long bno);
 	
-	//댓글
-	@Query(value = "SELECT b, w, count(r) " 
+	//게시글, 회원(작성자), 댓글 수 조회(목록)
+	@Query(value = "SELECT b, w, count(r) "
 			+ "FROM Board b "
 			+ "LEFT JOIN b.writer w "
 			+ "LEFT JOIN Reply r ON r.board = b "
@@ -30,12 +31,9 @@ public interface BoardRepository extends JpaRepository<Board, Long>{
 	Page<Object[]> getBoardWithReplyCount(Pageable pageable);
 	
 	//특정 게시물 조회
-	@Query( "SELECT b, w, count(r) " 
+	@Query("SELECT b, w, count(r) "
 			+ "FROM Board b LEFT JOIN b.writer w "
 			+ "LEFT OUTER JOIN Reply r ON r.board = b "
 			+ "WHERE b.bno = :bno")
 	Object getBoardByBno(@Param("bno") Long bno);
-	
-	
-	
 }

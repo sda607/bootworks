@@ -14,7 +14,25 @@ public interface BoardService {
 	//게시글 목록 보기 //Object[]
 	PageResultDto<BoardDto, Object[]> getList(PageRequestDto pageRequestDto);
 	
+	//게시글 상세 보기
+	BoardDto get(Long bno);
 	
+	//Entity에서 dto로 변환
+	default BoardDto entityToDto(Board board, Member member, Long replyCount) {
+			
+			BoardDto boardDto = BoardDto.builder()
+					.bno(board.getBno())
+					.title(board.getTitle())
+					.content(board.getContent())
+					.regDate(board.getRegDate())
+					.modDate(board.getModDate())
+					.writerEmail(member.getEmail())
+					.writerName(member.getName())
+					.replyCount(replyCount.intValue())
+					.build();
+			
+			return boardDto;
+		}
 	
 	//dto에서 Entity로 변환
 	default Board dtoToEntity(BoardDto dto) {

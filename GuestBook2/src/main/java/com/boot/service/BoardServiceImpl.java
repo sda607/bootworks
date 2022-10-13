@@ -1,11 +1,17 @@
 package com.boot.service;
 
+import java.util.function.Function;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.boot.dto.BoardDto;
 import com.boot.dto.PageRequestDto;
 import com.boot.dto.PageResultDto;
 import com.boot.entity.Board;
+import com.boot.entity.Member;
 import com.boot.repository.BoardRepository;
 
 import lombok.RequiredArgsConstructor;
@@ -26,8 +32,24 @@ public class BoardServiceImpl implements BoardService{
 	//게시글 목록 보기
 	@Override
 	public PageResultDto<BoardDto, Object[]> getList(PageRequestDto pageRequestDto) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		//Entity에서 dto로 호출
+		Function<Object[], BoardDto> fn = (en -> entityToDto((Board)en[0], 
+			(Member)en[1], (Long)en[2]));
+		
+		Pageable pageable = pageRequestDto.getPageable(Sort.by("bno").descending());
+		Page<Object[]> result = boardRepo.getBoardWithReplyCount(pageable);
+		
+		return new PageResultDto<BoardDto, Object[]>(result, fn);
+	}
+	
+	//게시글 상세 보기
+	@Override
+	public BoardDto get(Long bno) {
+		Object result = boardRepo.getBoardByBno(bno);
+		Object[] arr = (Object[]) result; 
+		return entityToDto((Board)arr[0], 
+				(Member)arr[1], (Long)arr[2]);
 	}
 
 }
