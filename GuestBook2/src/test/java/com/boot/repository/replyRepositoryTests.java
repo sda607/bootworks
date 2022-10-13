@@ -1,5 +1,6 @@
 package com.boot.repository;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.stream.IntStream;
 
@@ -48,6 +49,18 @@ public class replyRepositoryTests {
 		System.out.println(reply);
 		System.out.println(reply.getReplyer());
 	}
+	
+	//댓글 목록 
+	@Test
+	public void testListByBoard() {
+		Board board = Board.builder().bno(100L).build();
+		
+		List<Reply> replyList = replyRepo.getRepliesByBoardOrderByRno(board);
+		
+		replyList.forEach(reply -> System.out.println(reply));
+	}
+	
+	
 	
 	
 }

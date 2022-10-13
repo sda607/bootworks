@@ -87,5 +87,20 @@ public class BoardRepositoryTests{
 		System.out.println(Arrays.toString(arr));
 	}
 	
+	//검색 테스트
+	@Test
+	public void testSearch1() {
+		boardRepo.search1();
+	}
 	
+	//검색 처리
+	@Test
+	public void testSearchPage() {
+		Pageable pageable = 
+				PageRequest.of(0, 10, Sort.by("bno").descending()
+								          .and(Sort.by("title").ascending()));
+		
+		//제목에 1이 포함된 글을 검색
+		Page<Object[]> result = boardRepo.searchPage("t", "1", pageable);
+	}
 }
