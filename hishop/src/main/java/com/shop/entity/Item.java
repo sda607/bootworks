@@ -1,6 +1,5 @@
 package com.shop.entity;
 
-import java.time.LocalDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,7 +10,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
 
+import com.shop.config.BaseEntity;
 import com.shop.constant.ItemSellStatus;
+import com.shop.dto.ItemFormDto;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -21,7 +22,7 @@ import lombok.ToString;
 @ToString
 @Getter @Setter
 @Entity
-public class Item {
+public class Item extends BaseEntity{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -39,13 +40,20 @@ public class Item {
 	
 	@Lob	//Large object
 	@Column(nullable = false)
-	private String intemDetail;//상세 설명
+	private String itemDetail;//상세 설명
 	
 	@Enumerated(EnumType.STRING)
 	private ItemSellStatus intemSEllStatus;
 	
-	private LocalDateTime regTime;	//등록 시간
+	//상품 수정 메서드
+	public void updateItem(ItemFormDto itemFormDto) {
+		this.itemNm = itemFormDto.getItemNm();
+		this.price = itemFormDto.getPrice();
+		this.stockNumber = itemFormDto.getStockNumber();
+		this.itemDetail = itemFormDto.getItemDetail();
+		this.intemSEllStatus = itemFormDto.getItemSellStatus();
+		
+	}
 	
-	private LocalDateTime updateTime;//수정 시간
 	
 }
