@@ -5,16 +5,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityNotFoundException;
-import javax.transaction.Transactional;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.shop.dto.ItemFormDto;
 import com.shop.dto.ItemImgDto;
+import com.shop.dto.ItemSearchDto;
+import com.shop.dto.MainItemDto;
 import com.shop.entity.Item;
 import com.shop.entity.ItemImg;
 import com.shop.repository.ItemImgRepository;
@@ -91,6 +92,17 @@ public class ItemService {
 		return item.getId();
 	}
 	
+	//상품 검색
+	@Transactional(readOnly = true)
+	public Page<Item> getAdminItemPage(ItemSearchDto itemSearchDto, Pageable pageable){
+		return itemRepo.getAdminItemPage(itemSearchDto, pageable);
+	}
+	
+	//메인 페이지 상품 데이터 조회
+	@Transactional(readOnly = true)
+    public Page<MainItemDto> getMainItemPage(ItemSearchDto itemSearchDto, Pageable pageable){
+        return itemRepo.getMainItemPage(itemSearchDto, pageable);
+    }
 	
 	
 	

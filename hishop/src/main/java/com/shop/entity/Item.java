@@ -43,7 +43,7 @@ public class Item extends BaseEntity{
 	private String itemDetail;//상세 설명
 	
 	@Enumerated(EnumType.STRING)
-	private ItemSellStatus intemSEllStatus;
+	private ItemSellStatus itemSellStatus;
 	
 	//상품 수정 메서드
 	public void updateItem(ItemFormDto itemFormDto) {
@@ -51,7 +51,7 @@ public class Item extends BaseEntity{
 		this.price = itemFormDto.getPrice();
 		this.stockNumber = itemFormDto.getStockNumber();
 		this.itemDetail = itemFormDto.getItemDetail();
-		this.intemSEllStatus = itemFormDto.getItemSellStatus();
+		this.itemSellStatus= itemFormDto.getItemSellStatus();
 		
 	}
 	

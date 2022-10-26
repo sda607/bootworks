@@ -38,7 +38,7 @@ public class ItemImg extends BaseEntity{
 	private Item item;
 	
 	//이미지 정보 수정
-	public void updateItemImg(String imgName, String oriImgName,
+	public void updateItemImg(String oriImgName, String imgName,
 			String imgUrl) {
 		this.imgName = imgName;
 		this.oriImgName = oriImgName;
